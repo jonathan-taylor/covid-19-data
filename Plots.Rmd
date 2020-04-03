@@ -1,0 +1,138 @@
+---
+jupyter:
+  jupytext:
+    cell_metadata_filter: all,-slideshow
+    formats: ipynb,Rmd
+    text_representation:
+      extension: .Rmd
+      format_name: rmarkdown
+      format_version: '1.1'
+      jupytext_version: 1.1.1
+  kernelspec:
+    display_name: Python 3
+    language: python
+    name: python3
+---
+
+```{python collapsed=TRUE}
+import pandas as pd, numpy as np
+# %matplotlib inline
+import matplotlib
+matplotlib.rc('figure', figsize=(8,8))
+```
+
+```{python}
+states = pd.read_csv('us-states.csv')
+daily = states.groupby(by='date')
+states.columns
+```
+
+## US deaths & cases
+
+```{python collapsed=TRUE}
+totals = daily.sum()
+```
+
+```{python}
+daily_deaths = np.asarray(totals['deaths']).copy()
+daily_deaths[1:] = daily_deaths[1:] - daily_deaths[:-1]
+totals['daily_deaths'] = daily_deaths
+totals.plot(y=['deaths', 'daily_deaths'], linewidth=3)
+```
+
+```{python}
+daily_cases = np.asarray(totals['cases']).copy()
+daily_cases[1:] = daily_cases[1:] - daily_cases[:-1]
+totals['daily_cases'] = daily_cases
+totals.plot(y=['cases', 'daily_cases'], linewidth=3)
+```
+
+Daily cases in US looks sort of like linear growth.
+
+
+## California deaths & cases
+
+```{python collapsed=TRUE}
+cali = states.loc[lambda df: df['state'] == 'California']
+```
+
+```{python}
+daily_ca_deaths = np.asarray(cali['deaths']).copy()
+daily_ca_deaths[1:] = daily_ca_deaths[1:] - daily_ca_deaths[:-1]
+cali['daily_deaths'] = daily_ca_deaths
+cali.plot(y=['deaths', 'daily_deaths'], linewidth=3)
+```
+
+```{python}
+daily_ca_cases = np.asarray(cali['cases']).copy()
+daily_ca_cases[1:] = daily_ca_cases[1:] - daily_ca_cases[:-1]
+cali['daily_cases'] = daily_ca_cases
+cali.plot(y=['cases', 'daily_cases'], linewidth=3)
+```
+
+Daily cases in CA look linear -- suggesting quadratic growth?
+
+## New York deaths & cases
+
+```{python collapsed=TRUE}
+ny = states.loc[lambda df: df['state'] == 'New York']
+```
+
+```{python}
+daily_ny_deaths = np.asarray(ny['deaths']).copy()
+daily_ny_deaths[1:] = daily_ny_deaths[1:] - daily_ny_deaths[:-1]
+ny['daily_deaths'] = daily_ny_deaths
+ny.plot(y=['deaths', 'daily_deaths'], linewidth=3)
+```
+
+```{python}
+daily_ny_cases = np.asarray(ny['cases']).copy()
+daily_ny_cases[1:] = daily_ny_cases[1:] - daily_ny_cases[:-1]
+ny['daily_cases'] = daily_ny_cases
+ny.plot(y=['cases', 'daily_cases'], linewidth=3)
+```
+
+Daily cases in NY looks like linear growth -- suggesting quadratic growth? Albeit they are really high :( 
+
+
+## Florida deaths & cases
+
+```{python collapsed=TRUE}
+fl = states.loc[lambda df: df['state'] == 'Florida']
+```
+
+```{python}
+daily_fl_deaths = np.asarray(fl['deaths']).copy()
+daily_fl_deaths[1:] = daily_fl_deaths[1:] - daily_fl_deaths[:-1]
+fl['daily_deaths'] = daily_fl_deaths
+fl.plot(y=['deaths', 'daily_deaths'], linewidth=3)
+```
+
+```{python lines_to_next_cell=0}
+daily_fl_cases = np.asarray(fl['cases']).copy()
+daily_fl_cases[1:] = daily_fl_cases[1:] - daily_fl_cases[:-1]
+fl['daily_cases'] = daily_fl_cases
+fl.plot(y=['cases', 'daily_cases'], linewidth=3)
+```
+
+## Texas deaths & cases
+
+```{python collapsed=TRUE}
+tx = states.loc[lambda df: df['state'] == 'Texas']
+```
+
+```{python}
+daily_tx_deaths = np.asarray(tx['deaths']).copy()
+daily_tx_deaths[1:] = daily_tx_deaths[1:] - daily_tx_deaths[:-1]
+tx['daily_deaths'] = daily_tx_deaths
+tx.plot(y=['deaths', 'daily_deaths'], linewidth=3)
+```
+
+```{python lines_to_next_cell=0}
+daily_tx_cases = np.asarray(tx['cases']).copy()
+daily_tx_cases[1:] = daily_tx_cases[1:] - daily_tx_cases[:-1]
+tx['daily_cases'] = daily_tx_cases
+tx.plot(y=['cases', 'daily_cases'], linewidth=3)
+```
+
+
