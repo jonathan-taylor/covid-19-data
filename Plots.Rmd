@@ -50,6 +50,12 @@ totals.plot(y=['cases', 'daily_cases'], linewidth=3)
 Daily cases in US looks sort of like linear growth.
 
 
+## Last few days
+
+```{python}
+totals[-3:]
+```
+
 ## California deaths & cases
 
 ```{python collapsed=TRUE}
@@ -114,7 +120,6 @@ daily_fl_cases[1:] = daily_fl_cases[1:] - daily_fl_cases[:-1]
 fl['daily_cases'] = daily_fl_cases
 fl.plot(y=['cases', 'daily_cases'], linewidth=3)
 ```
-
 ## Texas deaths & cases
 
 ```{python collapsed=TRUE}
