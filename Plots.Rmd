@@ -36,19 +36,16 @@ totals = daily.sum()
 ```{python}
 daily_deaths = np.asarray(totals['deaths']).copy()
 daily_deaths[1:] = daily_deaths[1:] - daily_deaths[:-1]
-totals['daily_deaths'] = daily_deaths
-totals.plot(y=['deaths', 'daily_deaths'], linewidth=3)
+totals.insert(3, 'daily_deaths', daily_deaths)
+totals.plot.bar(y=['deaths', 'daily_deaths'], subplots=True)
 ```
 
 ```{python}
 daily_cases = np.asarray(totals['cases']).copy()
 daily_cases[1:] = daily_cases[1:] - daily_cases[:-1]
-totals['daily_cases'] = daily_cases
-totals.plot(y=['cases', 'daily_cases'], linewidth=3)
+totals.insert(3, 'daily_cases', daily_cases)
+totals.plot.bar(y=['cases', 'daily_cases'], subplots=True)
 ```
-
-Daily cases in US looks sort of like linear growth.
-
 
 ## Last few days
 
@@ -65,41 +62,39 @@ cali = states.loc[lambda df: df['state'] == 'California']
 ```{python}
 daily_ca_deaths = np.asarray(cali['deaths']).copy()
 daily_ca_deaths[1:] = daily_ca_deaths[1:] - daily_ca_deaths[:-1]
-cali['daily_deaths'] = daily_ca_deaths
-cali.plot(y=['deaths', 'daily_deaths'], linewidth=3)
+cali.insert(3, 'daily_deaths', daily_ca_deaths)
+cali.plot.bar(y=['deaths', 'daily_deaths'], x='date', subplots=True)
 ```
 
-```{python}
+```{python lines_to_next_cell=0}
 daily_ca_cases = np.asarray(cali['cases']).copy()
 daily_ca_cases[1:] = daily_ca_cases[1:] - daily_ca_cases[:-1]
-cali['daily_cases'] = daily_ca_cases
-cali.plot(y=['cases', 'daily_cases'], linewidth=3)
+cali.insert(3, 'daily_cases', daily_ca_cases)
+cali.plot.bar(y=['cases', 'daily_cases'], x='date', subplots=True)
 ```
 
-Daily cases in CA look linear -- suggesting quadratic growth?
+
 
 ## New York deaths & cases
 
-```{python collapsed=TRUE}
+```{python}
 ny = states.loc[lambda df: df['state'] == 'New York']
+ny.columns
 ```
 
 ```{python}
 daily_ny_deaths = np.asarray(ny['deaths']).copy()
 daily_ny_deaths[1:] = daily_ny_deaths[1:] - daily_ny_deaths[:-1]
-ny['daily_deaths'] = daily_ny_deaths
-ny.plot(y=['deaths', 'daily_deaths'], linewidth=3)
+ny.insert(3, 'daily_deaths', daily_ny_deaths)
+ny.plot.bar(y=['deaths', 'daily_deaths'], x='date', subplots=True)
 ```
 
 ```{python}
 daily_ny_cases = np.asarray(ny['cases']).copy()
 daily_ny_cases[1:] = daily_ny_cases[1:] - daily_ny_cases[:-1]
-ny['daily_cases'] = daily_ny_cases
-ny.plot(y=['cases', 'daily_cases'], linewidth=3)
+ny.insert(3, 'daily_cases', daily_ny_cases)
+ny.plot.bar(y=['cases', 'daily_cases'], x='date', subplots=True)
 ```
-
-Daily cases in NY looks like linear growth -- suggesting quadratic growth? Albeit they are really high :( 
-
 
 ## Florida deaths & cases
 
@@ -110,15 +105,15 @@ fl = states.loc[lambda df: df['state'] == 'Florida']
 ```{python}
 daily_fl_deaths = np.asarray(fl['deaths']).copy()
 daily_fl_deaths[1:] = daily_fl_deaths[1:] - daily_fl_deaths[:-1]
-fl['daily_deaths'] = daily_fl_deaths
-fl.plot(y=['deaths', 'daily_deaths'], linewidth=3)
+fl.insert(3, 'daily_deaths', daily_fl_deaths)
+fl.plot.bar(y=['deaths', 'daily_deaths'], x='date', subplots=True)
 ```
 
 ```{python lines_to_next_cell=0}
 daily_fl_cases = np.asarray(fl['cases']).copy()
 daily_fl_cases[1:] = daily_fl_cases[1:] - daily_fl_cases[:-1]
-fl['daily_cases'] = daily_fl_cases
-fl.plot(y=['cases', 'daily_cases'], linewidth=3)
+fl.insert(3, 'daily_cases', daily_fl_cases)
+fl.plot.bar(y=['cases', 'daily_cases'], subplots=True)
 ```
 ## Texas deaths & cases
 
@@ -129,15 +124,81 @@ tx = states.loc[lambda df: df['state'] == 'Texas']
 ```{python}
 daily_tx_deaths = np.asarray(tx['deaths']).copy()
 daily_tx_deaths[1:] = daily_tx_deaths[1:] - daily_tx_deaths[:-1]
-tx['daily_deaths'] = daily_tx_deaths
-tx.plot(y=['deaths', 'daily_deaths'], linewidth=3)
+tx.insert(3, 'daily_deaths', daily_tx_deaths)
+tx.plot.bar(y=['deaths', 'daily_deaths'], x='date', subplots=True)
 ```
 
 ```{python lines_to_next_cell=0}
 daily_tx_cases = np.asarray(tx['cases']).copy()
 daily_tx_cases[1:] = daily_tx_cases[1:] - daily_tx_cases[:-1]
-tx['daily_cases'] = daily_tx_cases
-tx.plot(y=['cases', 'daily_cases'], linewidth=3)
+tx.insert(3, 'daily_cases', daily_tx_cases)
+tx.plot.bar(y=['cases', 'daily_cases'], subplots=True)
+```
+## Louisiana deaths & cases
+
+```{python}
+la = states.loc[lambda df: df['state'] == 'Louisiana']
+daily_la_deaths = np.asarray(la['deaths']).copy()
+daily_la_deaths[1:] = daily_la_deaths[1:] - daily_la_deaths[:-1]
+la.insert(3, 'daily_deaths', daily_la_deaths)
+la.plot.bar(y=['deaths', 'daily_deaths'], x='date', subplots=True)
 ```
 
+```{python lines_to_next_cell=0}
+daily_la_cases = np.asarray(la['cases']).copy()
+daily_la_cases[1:] = daily_la_cases[1:] - daily_la_cases[:-1]
+la.insert(3, 'daily_cases', daily_la_cases)
+la.plot.bar(y=['cases', 'daily_cases'], subplots=True)
+```
+## Tennessee deaths & cases
 
+```{python}
+tn = states.loc[lambda df: df['state'] == 'Tennessee']
+daily_tn_deaths = np.asarray(tn['deaths']).copy()
+daily_tn_deaths[1:] = daily_tn_deaths[1:] - daily_tn_deaths[:-1]
+tn.insert(3, 'daily_deaths', daily_tn_deaths)
+tn.plot.bar(y=['deaths', 'daily_deaths'], x='date', subplots=True)
+```
+
+```{python lines_to_next_cell=0}
+daily_tn_cases = np.asarray(tn['cases']).copy()
+daily_tn_cases[1:] = daily_tn_cases[1:] - daily_tn_cases[:-1]
+tn.insert(3, 'daily_cases', daily_tn_cases)
+tn.plot.bar(y=['cases', 'daily_cases'], x='date', subplots=True)
+```
+# From [Our world in data](https://ourworldindata.org/coronavirus-data)
+
+## Italy
+
+```{python}
+world = pd.read_csv('daily-covid-cases-deaths.csv')
+italy = world.loc[lambda df: df['Entity'] == 'Italy']
+italy = italy.rename(columns={'Daily confirmed cases (cases)':'daily_cases',
+                              'Daily confirmed deaths (deaths)':'daily_deaths'})
+italy.insert(3, 'cases', np.cumsum(italy['daily_cases']))
+italy.insert(3, 'deaths', np.cumsum(italy['daily_deaths']))
+italy.plot.bar(y=['cases', 'daily_cases'], x='Date', subplots=True)            
+```
+
+```{python}
+italy.plot.bar(y=['deaths', 'daily_deaths'], x='Date', subplots=True)
+```
+
+## USA again
+
+```{python}
+usa = world.loc[lambda df: df['Entity'] == 'United States']
+usa = usa.rename(columns={'Daily confirmed cases (cases)':'daily_cases',
+                          'Daily confirmed deaths (deaths)':'daily_deaths'})
+usa.insert(3, 'cases', np.cumsum(usa['daily_cases']))
+usa.insert(3, 'deaths', np.cumsum(usa['daily_deaths']))
+usa.plot.bar(y=['cases', 'daily_cases'], x='Date', subplots=True)            
+```
+
+```{python}
+usa.plot.bar(y=['deaths', 'daily_deaths'], x='Date', subplots=True)
+```
+
+```{python collapsed=TRUE}
+
+```
