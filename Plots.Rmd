@@ -166,39 +166,3 @@ daily_tn_cases[1:] = daily_tn_cases[1:] - daily_tn_cases[:-1]
 tn.insert(3, 'daily_cases', daily_tn_cases)
 tn.plot.bar(y=['cases', 'daily_cases'], x='date', subplots=True)
 ```
-# From [Our world in data](https://ourworldindata.org/coronavirus-data)
-
-## Italy
-
-```{python}
-world = pd.read_csv('daily-covid-cases-deaths.csv')
-italy = world.loc[lambda df: df['Entity'] == 'Italy']
-italy = italy.rename(columns={'Daily confirmed cases (cases)':'daily_cases',
-                              'Daily confirmed deaths (deaths)':'daily_deaths'})
-italy.insert(3, 'cases', np.cumsum(italy['daily_cases']))
-italy.insert(3, 'deaths', np.cumsum(italy['daily_deaths']))
-italy.plot.bar(y=['cases', 'daily_cases'], x='Date', subplots=True)            
-```
-
-```{python}
-italy.plot.bar(y=['deaths', 'daily_deaths'], x='Date', subplots=True)
-```
-
-## USA again
-
-```{python}
-usa = world.loc[lambda df: df['Entity'] == 'United States']
-usa = usa.rename(columns={'Daily confirmed cases (cases)':'daily_cases',
-                          'Daily confirmed deaths (deaths)':'daily_deaths'})
-usa.insert(3, 'cases', np.cumsum(usa['daily_cases']))
-usa.insert(3, 'deaths', np.cumsum(usa['daily_deaths']))
-usa.plot.bar(y=['cases', 'daily_cases'], x='Date', subplots=True)            
-```
-
-```{python}
-usa.plot.bar(y=['deaths', 'daily_deaths'], x='Date', subplots=True)
-```
-
-```{python collapsed=TRUE}
-
-```
