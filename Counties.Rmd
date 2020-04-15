@@ -1,0 +1,128 @@
+---
+jupyter:
+  jupytext:
+    cell_metadata_filter: all,-slideshow
+    formats: ipynb,Rmd
+    text_representation:
+      extension: .Rmd
+      format_name: rmarkdown
+      format_version: '1.2'
+      jupytext_version: 1.3.4
+  kernelspec:
+    display_name: Python 3
+    language: python
+    name: python3
+---
+
+```{python}
+import pandas as pd, numpy as np
+# %matplotlib inline
+import matplotlib
+matplotlib.rc('figure', figsize=(8,8))
+```
+
+```{python}
+cases = pd.read_csv('covid_confirmed_usafacts.csv')
+cases = cases.loc[lambda df: df['State'] == 'CA']
+counties = cases['County Name']
+cases.index = counties
+cases = cases.drop(['countyFIPS', 'stateFIPS', 'State', 'County Name'], axis=1).T
+```
+
+```{python}
+deaths = pd.read_csv('covid_deaths_usafacts.csv')
+deaths = deaths.loc[lambda df: df['State'] == 'CA']
+counties = deaths['County Name']
+deaths.index = counties
+deaths = deaths.drop(['countyFIPS', 'stateFIPS', 'State', 'County Name'], axis=1).T
+```
+
+## Data
+
+From [USA facts](https://usafacts.org/visualizations/coronavirus-covid-19-spread-map/)
+
+
+## Santa Clara
+
+```{python}
+santa_clara = pd.DataFrame({'deaths': deaths['Santa Clara County'], 'cases': cases['Santa Clara County']})
+daily_deaths = np.asarray(santa_clara['deaths']).copy()
+daily_deaths[1:] = daily_deaths[1:] - daily_deaths[:-1]
+santa_clara.insert(2, 'daily_deaths', daily_deaths)
+santa_clara.plot.bar(y=['deaths', 'daily_deaths'], subplots=True)
+```
+
+```{python}
+daily_cases = np.asarray(santa_clara['cases']).copy()
+daily_cases[1:] = daily_cases[1:] - daily_cases[:-1]
+santa_clara.insert(2, 'daily_cases', daily_cases)
+santa_clara.plot.bar(y=['cases', 'daily_cases'], subplots=True)
+```
+
+## Santa Cruz
+
+```{python}
+santa_cruz = pd.DataFrame({'deaths': deaths['Santa Cruz County'], 'cases': cases['Santa Cruz County']})
+daily_deaths = np.asarray(santa_cruz['deaths']).copy()
+daily_deaths[1:] = daily_deaths[1:] - daily_deaths[:-1]
+santa_cruz.insert(2, 'daily_deaths', daily_deaths)
+santa_cruz.plot.bar(y=['deaths', 'daily_deaths'], subplots=True)
+```
+
+```{python}
+daily_cases = np.asarray(santa_cruz['cases']).copy()
+daily_cases[1:] = daily_cases[1:] - daily_cases[:-1]
+santa_cruz.insert(2, 'daily_cases', daily_cases)
+santa_cruz.plot.bar(y=['cases', 'daily_cases'], subplots=True)
+```
+
+## San Mateo
+
+```{python}
+san_mateo = pd.DataFrame({'deaths': deaths['San Mateo County'], 'cases': cases['San Mateo County']})
+daily_deaths = np.asarray(san_mateo['deaths']).copy()
+daily_deaths[1:] = daily_deaths[1:] - daily_deaths[:-1]
+san_mateo.insert(2, 'daily_deaths', daily_deaths)
+san_mateo.plot.bar(y=['deaths', 'daily_deaths'], subplots=True)
+```
+
+```{python}
+daily_cases = np.asarray(san_mateo['cases']).copy()
+daily_cases[1:] = daily_cases[1:] - daily_cases[:-1]
+san_mateo.insert(2, 'daily_cases', daily_cases)
+san_mateo.plot.bar(y=['cases', 'daily_cases'], subplots=True)
+```
+
+## Alameda
+
+```{python}
+alameda = pd.DataFrame({'deaths': deaths['Alameda County'], 'cases': cases['Alameda County']})
+daily_deaths = np.asarray(alameda['deaths']).copy()
+daily_deaths[1:] = daily_deaths[1:] - daily_deaths[:-1]
+alameda.insert(2, 'daily_deaths', daily_deaths)
+alameda.plot.bar(y=['deaths', 'daily_deaths'], subplots=True)
+```
+
+```{python}
+daily_cases = np.asarray(alameda['cases']).copy()
+daily_cases[1:] = daily_cases[1:] - daily_cases[:-1]
+alameda.insert(2, 'daily_cases', daily_cases)
+alameda.plot.bar(y=['cases', 'daily_cases'], subplots=True)
+```
+
+## Los Angeles
+
+```{python}
+los_angeles = pd.DataFrame({'deaths': deaths['Los Angeles County'], 'cases': cases['Los Angeles County']})
+daily_deaths = np.asarray(los_angeles['deaths']).copy()
+daily_deaths[1:] = daily_deaths[1:] - daily_deaths[:-1]
+los_angeles.insert(2, 'daily_deaths', daily_deaths)
+los_angeles.plot.bar(y=['deaths', 'daily_deaths'], subplots=True)
+```
+
+```{python}
+daily_cases = np.asarray(los_angeles['cases']).copy()
+daily_cases[1:] = daily_cases[1:] - daily_cases[:-1]
+los_angeles.insert(2, 'daily_cases', daily_cases)
+los_angeles.plot.bar(y=['cases', 'daily_cases'], subplots=True)
+```
