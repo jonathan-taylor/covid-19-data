@@ -53,6 +53,10 @@ santa_clara.plot.bar(y=['deaths', 'daily_deaths'], subplots=True)
 ```
 
 ```{python}
+np.max(santa_clara['deaths'])
+```
+
+```{python}
 daily_cases = np.asarray(santa_clara['cases']).copy()
 daily_cases[1:] = daily_cases[1:] - daily_cases[:-1]
 santa_clara.insert(2, 'daily_cases', daily_cases)

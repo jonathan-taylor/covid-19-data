@@ -166,3 +166,35 @@ daily_tn_cases[1:] = daily_tn_cases[1:] - daily_tn_cases[:-1]
 tn.insert(3, 'daily_cases', daily_tn_cases)
 tn.plot.bar(y=['cases', 'daily_cases'], x='date', subplots=True)
 ```
+## New Jersey deaths & cases
+
+```{python}
+nj = states.loc[lambda df: df['state'] == 'New Jersey']
+daily_nj_deaths = np.asarray(nj['deaths']).copy()
+daily_nj_deaths[1:] = daily_nj_deaths[1:] - daily_nj_deaths[:-1]
+nj.insert(3, 'daily_deaths', daily_nj_deaths)
+nj.plot.bar(y=['deaths', 'daily_deaths'], x='date', subplots=True)
+```
+
+```{python lines_to_next_cell=0}
+daily_nj_cases = np.asarray(nj['cases']).copy()
+daily_nj_cases[1:] = daily_nj_cases[1:] - daily_nj_cases[:-1]
+nj.insert(3, 'daily_cases', daily_nj_cases)
+nj.plot.bar(y=['cases', 'daily_cases'], x='date', subplots=True)
+```
+## South Dakota deaths & cases
+
+```{python}
+sd = states.loc[lambda df: df['state'] == 'South Dakota']
+daily_sd_deaths = np.asarray(sd['deaths']).copy()
+daily_sd_deaths[1:] = daily_sd_deaths[1:] - daily_sd_deaths[:-1]
+sd.insert(3, 'daily_deaths', daily_sd_deaths)
+sd.plot.bar(y=['deaths', 'daily_deaths'], x='date', subplots=True)
+```
+
+```{python lines_to_next_cell=0}
+daily_sd_cases = np.asarray(sd['cases']).copy()
+daily_sd_cases[1:] = daily_sd_cases[1:] - daily_sd_cases[:-1]
+sd.insert(3, 'daily_cases', daily_sd_cases)
+sd.plot.bar(y=['cases', 'daily_cases'], x='date', subplots=True)
+```
