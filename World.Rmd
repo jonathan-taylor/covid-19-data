@@ -119,6 +119,21 @@ japan.plot.bar(y=['cases', 'daily_cases'], x='date', subplots=True)
 japan.plot.bar(y=['deaths', 'daily_deaths'], x='date', subplots=True)
 ```
 
+## Belgium
+
+```{python}
+belgium = world.loc[lambda df: df['location'] == 'Belgium']
+belgium = belgium.rename(columns={'new_cases':'daily_cases',
+                          'new_deaths':'daily_deaths'})
+belgium.insert(3, 'cases', np.cumsum(belgium['daily_cases']))
+belgium.insert(3, 'deaths', np.cumsum(belgium['daily_deaths']))
+belgium.plot.bar(y=['cases', 'daily_cases'], x='date', subplots=True)            
+```
+
+```{python}
+belgium.plot.bar(y=['deaths', 'daily_deaths'], x='date', subplots=True)
+```
+
 ```{python}
 np.sum(italy['daily_deaths']), np.sum(usa['daily_deaths']), np.sum(canada['daily_deaths'])
 ```
