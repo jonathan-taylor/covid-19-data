@@ -21,7 +21,7 @@ import matplotlib
 matplotlib.rc('figure', figsize=(8,8))
 ```
 
-```{python}
+```{python collapsed=TRUE}
 counties = pd.read_csv('us-counties.csv')
 counties = counties.loc[lambda df: df['state'] == 'California']
 ```
