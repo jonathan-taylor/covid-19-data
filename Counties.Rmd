@@ -28,7 +28,7 @@ counties = counties.loc[lambda df: df['state'] == 'California']
 
 ## Data
 
-From [USA facts](https://usafacts.org/visualizations/coronavirus-covid-19-spread-map/)
+- Previously from [USA facts](https://usafacts.org/visualizations/coronavirus-covid-19-spread-map/), now uses nytimes' github repo
 
 
 ## Santa Clara
