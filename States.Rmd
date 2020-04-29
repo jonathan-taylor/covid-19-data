@@ -166,7 +166,6 @@ daily_tn_cases[1:] = daily_tn_cases[1:] - daily_tn_cases[:-1]
 tn.insert(3, 'daily_cases', daily_tn_cases)
 tn.plot.bar(y=['cases', 'daily_cases'], x='date', subplots=True)
 ```
-<<<<<<< HEAD:Plots.Rmd
 ## Michigan deaths & cases
 
 ```{python}
@@ -214,4 +213,20 @@ daily_sd_cases = np.asarray(sd['cases']).copy()
 daily_sd_cases[1:] = daily_sd_cases[1:] - daily_sd_cases[:-1]
 sd.insert(3, 'daily_cases', daily_sd_cases)
 sd.plot.bar(y=['cases', 'daily_cases'], x='date', subplots=True)
+```
+## Georgia deaths & cases
+
+```{python}
+ga = states.loc[lambda df: df['state'] == 'Georgia']
+daily_ga_deaths = np.asarray(ga['deaths']).copy()
+daily_ga_deaths[1:] = daily_ga_deaths[1:] - daily_ga_deaths[:-1]
+ga.insert(3, 'daily_deaths', daily_ga_deaths)
+ga.plot.bar(y=['deaths', 'daily_deaths'], x='date', subplots=True)
+```
+
+```{python lines_to_next_cell=0}
+daily_ga_cases = np.asarray(ga['cases']).copy()
+daily_ga_cases[1:] = daily_ga_cases[1:] - daily_ga_cases[:-1]
+ga.insert(3, 'daily_cases', daily_ga_cases)
+ga.plot.bar(y=['cases', 'daily_cases'], x='date', subplots=True)
 ```
